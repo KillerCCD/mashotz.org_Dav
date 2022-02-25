@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mashtoz_flutter/ui/widgets/home.dart';
 import 'package:mashtoz_flutter/ui/widgets/login_screens/login_screen.dart';
 
 void main() {

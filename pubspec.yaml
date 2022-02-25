@@ -60,12 +60,18 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   fonts:
-    - family: Armenian
+    - family: Arshaluys
       fonts:
         - asset: assets/fonts/ArshaluyseArtU-Bold.ttf
           style: normal
           weight: 700
-    
+    - family: Grapalat
+      fonts:
+        - asset: assets/fonts/GHEAGpalatBld.otf
+        - asset: assets/fonts/GHEAGpalatBlit.otf
+        - asset: assets/fonts/GHEAGpalatRit.otf
+        - asset: assets/fonts/GHEAGpalatReg.otf
+          style: normal
           
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

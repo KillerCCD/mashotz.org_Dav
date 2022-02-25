@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mashtoz_flutter/ui/widgets/login_screens/login_form.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -20,24 +21,14 @@ class _LoginScreenState extends State<LoginScreen> {
           1,
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Center(
-            //   child: Stack(
-            //     children: [
-            //       SvgPicture.asset('/images/mashotz_login_logo.svg'),
-            //     ],
-            //   ),
-            // ),
-            Center(
-              child: Text(
-                'Արշալույս',
-                style: TextStyle(
-                    fontFamily: 'Armenian',
-                    fontSize: 30.0,
-                    color: Color.fromRGBO(251, 196, 102, 1)),
-              ),
+            const SizedBox(height: 50),
+            Stack(
+              children: [
+                SvgPicture.asset("assets/images/mashotz_login_logo.svg"),
+              ],
             ),
+            const LoginForm(),
           ],
         ));
   }
