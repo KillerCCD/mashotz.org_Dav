@@ -10,6 +10,7 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
+  GestureTapCallback? onpreesed;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -115,23 +116,50 @@ class _LoginFormState extends State<LoginForm> {
             fontFamily: 'Grapalat',
             color: Color.fromRGBO(250, 147, 114, 1)),
       ),
-      style: TextButton.styleFrom(padding: const EdgeInsets.only(right: 40)),
+      style: TextButton.styleFrom(
+        padding: const EdgeInsets.only(right: 40),
+      ),
     );
   }
 
   Widget logimButton() {
-    return TextButton(
-      onPressed: () {
-        print('object');
-      },
-      child: const Text(
-        'Մոռացե',
-        style: TextStyle(
-            fontSize: 12,
-            fontFamily: 'Grapalat',
-            color: Color.fromRGBO(250, 147, 114, 1)),
+    return RawMaterialButton(
+      onPressed: onpreesed,
+      //fillColor: Colors.blue.shade400,
+
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(left: 45.0),
+            width: 40,
+            height: 40,
+            color: const Color.fromRGBO(250, 147, 114, 1),
+            child: Center(
+                child: Stack(
+              children: const [
+                Icon(Icons.skip_next),
+              ],
+            )),
+          )
+
+          // TextButton(
+          //   onPressed: () {
+          //     print('object');
+          //   },
+          //   child: const Text(
+          //     'Մոռացե',
+          //     style: TextStyle(
+          //         fontSize: 12,
+          //         fontFamily: 'Grapalat',
+          //         color: Color.fromRGBO(250, 147, 114, 1)),
+          //   ),
+          //   style:
+          //       TextButton.styleFrom(padding: const EdgeInsets.only(left: 40)),
+          // ),
+        ],
       ),
-      style: TextButton.styleFrom(),
     );
   }
 }

@@ -68,9 +68,9 @@ flutter:
     - family: Grapalat
       fonts:
         - asset: assets/fonts/GHEAGpalatBld.otf
-        - asset: assets/fonts/GHEAGpalatBlit.otf
-        - asset: assets/fonts/GHEAGpalatRit.otf
-        - asset: assets/fonts/GHEAGpalatReg.otf
+        - asset: assets/fonts/GHEAGrapalatBlit.otf
+        - asset: assets/fonts/GHEAGrapalatRit.otf
+        - asset: assets/fonts/GHEAGrpalatReg.otf
           style: normal
           
   # The following line ensures that the Material Icons font is
