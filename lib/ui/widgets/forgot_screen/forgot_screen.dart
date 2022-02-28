@@ -24,15 +24,22 @@ class ForgotScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Row(
-                  children: const [
-                    Icon(
-                      Icons.arrow_back_ios_rounded,
-                      color: Palette.textOrLine,
+                  children: [
+                    IconButton(
+                      padding: const EdgeInsets.only(right: 20),
+                      splashRadius: 0.1,
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back_ios_rounded,
+                        color: Palette.textOrLine,
+                      ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 35,
                     ),
-                    Text(
+                    const Text(
                       'Մոռացել եք\n գաղտնաբառը',
                       textAlign: TextAlign.center,
                       style: TextStyle(

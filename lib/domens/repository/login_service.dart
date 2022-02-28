@@ -24,5 +24,6 @@ class LoginService {
     } catch (e) {
       print(e);
     }
+    return null;
   }
 }

@@ -1,5 +1,3 @@
-// ignore_for_file: no_logic_in_create_state
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mashtoz_flutter/config/palette.dart';
@@ -16,6 +14,7 @@ class SignupForm extends StatefulWidget {
 class _SignupFormState extends State<SignupForm> {
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Column(
@@ -23,21 +22,21 @@ class _SignupFormState extends State<SignupForm> {
           Padding(
             padding: const EdgeInsets.only(left: 20.0, right: 20.0),
             child: Column(
-              children: const [
-                SizedBox(height: 86.0),
-                _FullNameInput(),
-                SizedBox(height: 40.0),
-                _EmailIput(),
-                SizedBox(height: 40.0),
-                PasswordInput(),
-                SizedBox(height: 52.0),
-                // Row(children: const [
-
-                // ]),
-                Align(alignment: Alignment.centerRight, child: _LoginButton()),
-                SizedBox(height: 93.0),
+              children: [
+                SizedBox(height: screenSize.height / 13),
+                const _FullNameInput(),
+                SizedBox(height: screenSize.height / 17),
+                const _EmailIput(),
+                SizedBox(height: screenSize.height / 17),
+                const PasswordInput(),
+                SizedBox(height: screenSize.height / 17),
+                const Align(
+                    alignment: Alignment.centerRight, child: _LoginButton()),
               ],
             ),
+          ),
+          SizedBox(
+            height: screenSize.height * 0.23,
           ),
           _ComplexButton(),
         ],
@@ -52,7 +51,7 @@ class _EmailIput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      cursorColor: Palette.main,
+      cursorColor: Palette.cursor,
       decoration: const InputDecoration(
         focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: Palette.textOrLine)),
@@ -76,7 +75,7 @@ class _FullNameInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      cursorColor: Palette.main,
+      cursorColor: Palette.cursor,
       decoration: const InputDecoration(
         focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: Palette.textOrLine)),
@@ -113,7 +112,7 @@ class _PasswordInputState extends State<PasswordInput> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      cursorColor: Palette.main,
+      cursorColor: Palette.cursor,
       decoration: InputDecoration(
         focusedBorder: const UnderlineInputBorder(
             borderSide: BorderSide(color: Color.fromRGBO(255, 255, 255, 1))),
@@ -144,29 +143,73 @@ class _PasswordInputState extends State<PasswordInput> {
   }
 }
 
-class _LoginButton extends StatelessWidget {
+class _LoginButton extends StatefulWidget {
   const _LoginButton({Key? key}) : super(key: key);
 
   @override
+  State<_LoginButton> createState() => _LoginButtonState();
+}
+
+class _LoginButtonState extends State<_LoginButton> {
+  bool _isActive = false;
+  void isActive() {
+    setState(() {
+      _isActive = !_isActive;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    bool inActive = false;
     return SizedBox(
       width: 47,
-      child: RawMaterialButton(
-        onPressed: () {
-          print('dadas');
-        },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          // mainAxisSize: MainAxisSize.min,
-          children: [
-            SvgPicture.asset(
-              "assets/images/mains_button.svg",
-            
-              // color: Color.fromRGBO(189, 189, 189, 1),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        // mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            width: 40,
+            height: 40,
+            child: Stack(
+              //fit: StackFit.expand,
+              alignment: Alignment.centerRight,
+              //overflow: Overflow.visible,
+              children: [
+                /// bottom
+                Container(
+                  width: 40,
+                  height: 40,
+                  // color: Colors.orange,
+                  decoration: const BoxDecoration(boxShadow: [
+                    BoxShadow(
+                      color: Color.fromRGBO(0, 0, 0, 0.1),
+                      spreadRadius: -1,
+                      blurRadius: 1,
+                      offset: Offset(7, 5),
+                    ),
+                  ]),
+                ),
+                Container(
+                  width: 35,
+                  height: 40,
+                  color: _isActive ? Palette.main : Palette.disableButton,
+                  child: RawMaterialButton(
+                    splashColor: Palette.whenTapedButton,
+                    onPressed: isActive,
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: SizedBox(
+                    width: 26,
+                    child: SvgPicture.asset('assets/images/Vector 81.svg'),
+                  ),
+                ),
+
+                /// top
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

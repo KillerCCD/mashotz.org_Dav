@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mashtoz_flutter/config/palette.dart';
-import 'package:mashtoz_flutter/ui/widgets/login_screen/login_form.dart';
 import 'package:mashtoz_flutter/ui/widgets/singup_screen/signup_form.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -24,20 +23,34 @@ class SignupScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Row(
-                  children: const [
-                    Icon(
-                      Icons.arrow_back_ios_rounded,
-                      color: Palette.textOrLine,
+                  children: [
+                    // const Icon(
+                    //   Icons.arrow_back_ios_rounded,
+                    //   color: Palette.textOrLine,
+                    // ),
+                    IconButton(
+                      padding: const EdgeInsets.only(right: 20),
+                      splashRadius: 0.1,
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back_ios_rounded,
+                        color: Palette.textOrLine,
+                      ),
                     ),
-                    SizedBox(
-                      width: 79,
-                    ),
-                    Text(
-                      'Գրանցում',
-                      style: TextStyle(
-                          fontSize: 27,
-                          fontFamily: 'Grapalat',
-                          color: Palette.textOrLine),
+                    const Expanded(
+                      flex: 1,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          'Գրանցում',
+                          style: TextStyle(
+                              fontSize: 27,
+                              fontFamily: 'Grapalat',
+                              color: Palette.textOrLine),
+                        ),
+                      ),
                     ),
                   ],
                 ),

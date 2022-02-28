@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mashtoz_flutter/config/palette.dart';
-import 'package:mashtoz_flutter/ui/widgets/buttons/facebook_gmail_buttons.dart';
-import 'package:mashtoz_flutter/ui/widgets/login_screen/login_screen.dart';
 
 class ForgotForm extends StatefulWidget {
   const ForgotForm({Key? key}) : super(key: key);
@@ -40,7 +38,7 @@ class _EmailIput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      cursorColor: Palette.main,
+      cursorColor: Palette.cursor,
       decoration: const InputDecoration(
         focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: Palette.textOrLine)),
@@ -83,24 +81,6 @@ class _LoginButton extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _ForgotButton extends StatelessWidget {
-  const _ForgotButton({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () {
-        print('object');
-      },
-      child: const Text(
-        'Մոռացե՞լ եք գաղտնաբառը',
-        style: TextStyle(
-            fontSize: 12, fontFamily: 'Grapalat', color: Palette.main),
-      ),
-      style: TextButton.styleFrom(padding: const EdgeInsets.only(right: 40)),
     );
   }
 }

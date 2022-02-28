@@ -7,7 +7,7 @@ import 'package:mashtoz_flutter/domens/repository/login_service.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginService loginService;
 
-  LoginBloc({required this.loginService}) : super(LoginInitial()) {
+  LoginBloc({required this.loginService}) : super(const LoginInitial()) {
     on<UserNameChanged>(onChanged);
     on<ButtonPressed>(onPressed);
   }
