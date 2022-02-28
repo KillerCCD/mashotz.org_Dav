@@ -8,7 +8,9 @@ abstract class LoginState extends Equatable {
   List<Object?> get props => [];
 }
 
-class LoginInitial extends LoginState {}
+class LoginInitial extends LoginState {
+  const LoginInitial();
+}
 
 class LoginSucces extends LoginState {
   final List<User> users;
@@ -21,4 +23,6 @@ class LoginSucces extends LoginState {
   }
 }
 
-class LoginFeilure extends LoginState {}
+class LoginFeilure extends LoginState {
+  const LoginFeilure();
+}

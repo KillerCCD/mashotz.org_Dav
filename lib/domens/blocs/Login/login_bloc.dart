@@ -21,7 +21,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   void onPressed(ButtonPressed event, Emitter<LoginState> emit) {
-    if (state is LoginSucces) {
+    if (state  is LoginSucces) {
       loginService.login(event.user.toMap());
     }
   }

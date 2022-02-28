@@ -21,6 +21,8 @@ class LoginService {
         List jsonResponse = json.decode(request.body);
         return jsonResponse.map((data) => User.fromJson(data)).toList();
       }
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    }
   }
 }
