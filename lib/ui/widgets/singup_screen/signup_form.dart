@@ -189,7 +189,7 @@ class _LoginButtonState extends State<_LoginButton> {
                   ]),
                 ),
                 Container(
-                  width: 35,
+                  width: 37,
                   height: 40,
                   color: _isActive ? Palette.main : Palette.disableButton,
                   child: RawMaterialButton(
