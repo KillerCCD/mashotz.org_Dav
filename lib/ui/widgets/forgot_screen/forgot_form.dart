@@ -41,9 +41,9 @@ class _EmailIput extends StatelessWidget {
       cursorColor: Palette.cursor,
       decoration: const InputDecoration(
         focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Palette.textOrLine)),
+            borderSide: BorderSide(color: Palette.textLineOrBackGroundColor)),
         enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Palette.textOrLine)),
+            borderSide: BorderSide(color: Palette.textLineOrBackGroundColor)),
         labelText: 'էլ. փոստ',
         labelStyle: TextStyle(
           fontFamily: 'Grapalat',

@@ -33,7 +33,7 @@ class ForgotScreen extends StatelessWidget {
                       },
                       icon: const Icon(
                         Icons.arrow_back_ios_rounded,
-                        color: Palette.textOrLine,
+                        color: Palette.textLineOrBackGroundColor,
                       ),
                     ),
                     const SizedBox(
@@ -45,7 +45,7 @@ class ForgotScreen extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 27,
                           fontFamily: 'Grapalat',
-                          color: Palette.textOrLine),
+                          color: Palette.textLineOrBackGroundColor),
                     ),
                   ],
                 ),
@@ -59,7 +59,7 @@ class ForgotScreen extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 16,
                     fontFamily: 'Grapalat',
-                    color: Palette.textOrLine),
+                    color: Palette.textLineOrBackGroundColor),
               ),
               const ForgotForm(),
             ],

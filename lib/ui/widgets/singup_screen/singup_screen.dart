@@ -36,7 +36,7 @@ class SignupScreen extends StatelessWidget {
                       },
                       icon: const Icon(
                         Icons.arrow_back_ios_rounded,
-                        color: Palette.textOrLine,
+                        color: Palette.textLineOrBackGroundColor,
                       ),
                     ),
                     const Expanded(
@@ -48,7 +48,7 @@ class SignupScreen extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 27,
                               fontFamily: 'Grapalat',
-                              color: Palette.textOrLine),
+                              color: Palette.textLineOrBackGroundColor),
                         ),
                       ),
                     ),

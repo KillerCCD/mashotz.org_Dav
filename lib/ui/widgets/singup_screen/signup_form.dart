@@ -54,9 +54,9 @@ class _EmailIput extends StatelessWidget {
       cursorColor: Palette.cursor,
       decoration: const InputDecoration(
         focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Palette.textOrLine)),
+            borderSide: BorderSide(color: Palette.textLineOrBackGroundColor)),
         enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Palette.textOrLine)),
+            borderSide: BorderSide(color: Palette.textLineOrBackGroundColor)),
         labelText: 'էլ. փոստ',
         labelStyle: TextStyle(
           fontFamily: 'Grapalat',
@@ -78,9 +78,9 @@ class _FullNameInput extends StatelessWidget {
       cursorColor: Palette.cursor,
       decoration: const InputDecoration(
         focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Palette.textOrLine)),
+            borderSide: BorderSide(color: Palette.textLineOrBackGroundColor)),
         enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Palette.textOrLine)),
+            borderSide: BorderSide(color: Palette.textLineOrBackGroundColor)),
         labelText: 'Անուն Ազգանուն',
         labelStyle: TextStyle(
           fontFamily: 'Grapalat',
@@ -130,11 +130,11 @@ class _PasswordInputState extends State<PasswordInput> {
             child: isHiddenPassword
                 ? const Icon(
                     Icons.visibility,
-                    color: Palette.textOrLine,
+                    color: Palette.textLineOrBackGroundColor,
                   )
                 : const Icon(
                     Icons.visibility_off,
-                    color: Palette.textOrLine,
+                    color: Palette.textLineOrBackGroundColor,
                   ),
           ),
         ),
@@ -255,7 +255,9 @@ class _SignUpButton extends StatelessWidget {
       child: const Text(
         'Մուտք գործել',
         style: TextStyle(
-            fontSize: 16, fontFamily: 'Grapalat', color: Palette.textOrLine),
+            fontSize: 16,
+            fontFamily: 'Grapalat',
+            color: Palette.textLineOrBackGroundColor),
       ),
       style: TextButton.styleFrom(padding: const EdgeInsets.only(right: 40)),
     );

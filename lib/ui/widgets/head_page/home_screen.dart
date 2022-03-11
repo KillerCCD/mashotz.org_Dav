@@ -6,7 +6,6 @@ import 'package:mashtoz_flutter/config/palette.dart';
 import '../buttons/bottom_navigation_bar/bottom_app_bar.dart';
 import './menu_pages/menu_pages.dart';
 
-//enum BottomIcons { Home, Favorite, Search, Account }
 enum BottomIcons { home, library, search, italian, account, initall }
 
 class HomeScreen extends StatefulWidget {
@@ -32,6 +31,21 @@ class _HomeScreenState extends State<HomeScreen> {
     ItalianPage(),
     AccountPage(),
   ];
+
+  tirgleColor() {
+    return icons == BottomIcons.library
+        ? Palette.libraryBacgroundColor
+        : false || icons == BottomIcons.home
+            ? Palette.textLineOrBackGroundColor
+            : false || icons == BottomIcons.search
+                ? Palette.searchBackGroundColor
+                : false || icons == BottomIcons.italian
+                    ? Palette.textLineOrBackGroundColor
+                    : false || icons == BottomIcons.account
+                        ? Palette.textLineOrBackGroundColor
+                        : null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +60,8 @@ class _HomeScreenState extends State<HomeScreen> {
       // padding: const EdgeInsets.only(top: 14),
       child: Stack(
         children: [
-          SizedBox(
+          Container(
+            color: tirgleColor(),
             width: double.infinity,
             height: 20,
             // color: Colors.black,
