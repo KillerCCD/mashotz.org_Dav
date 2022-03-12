@@ -7,15 +7,19 @@ class TextHelper extends StatelessWidget {
   final FontWeight? fontWeight;
   final double? bottomPadding;
   final String? text;
-  const TextHelper({
-    Key? key,
-    this.text = '',
-    this.bottomPadding = 0,
-    this.fontSize = 0,
-    this.fontFamily = '',
-    this.laterSpacing = 0,
-    this.fontWeight = FontWeight.normal,
-  }) : super(key: key);
+  final Color? color;
+  final TextAlign? textAlign;
+  const TextHelper(
+      {Key? key,
+      this.text = '',
+      this.bottomPadding = 0,
+      this.fontSize = 0,
+      this.fontFamily = '',
+      this.laterSpacing = 0,
+      this.fontWeight = FontWeight.normal,
+      this.textAlign,
+      this.color})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +27,13 @@ class TextHelper extends StatelessWidget {
       padding: EdgeInsets.only(bottom: bottomPadding ?? 0),
       child: Text(
         text ?? '',
+        textAlign: textAlign,
         style: TextStyle(
             letterSpacing: laterSpacing,
             fontFamily: fontFamily,
             fontSize: fontSize,
-            fontWeight: fontWeight),
+            fontWeight: fontWeight,
+            color: color),
       ),
     );
   }

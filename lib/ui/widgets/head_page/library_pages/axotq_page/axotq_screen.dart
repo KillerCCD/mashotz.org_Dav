@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mashtoz_flutter/config/palette.dart';
 
-import '../../helper_widgets/actions_widgets.dart';
-import '../../helper_widgets/text_widgets.dart';
+import '../../../../../config/palette.dart';
+import '../../../helper_widgets/actions_widgets.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class AxotqScreen extends StatelessWidget {
+  const AxotqScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,28 +17,36 @@ class HomePage extends StatelessWidget {
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(43),
             child: AppBar(
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back_ios_new_rounded),
+                padding: const EdgeInsets.only(bottom: 22),
+                iconSize: 25,
+                color: Palette.appBarTitleColor,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
               elevation: 0,
               automaticallyImplyLeading: false,
               backgroundColor: Colors.transparent,
               flexibleSpace: const ActionsHelper(
-                  leftPadding: 20,
-                  botomPadding: 1.5,
-                  text: 'Օրվա խոսք',
-                  fontFamily: 'Grapalat',
-                  fontSize: 20,
-                  laterSpacing: 1,
-                  fontWeight: FontWeight.bold,
-                  color: Palette.appBarTitleColor),
-              // leading: const TextHelper(
-              //
-              // ),
+                leftPadding: 50,
+                botomPadding: 0,
+                topPadding: 9,
+                text: 'Աղոթք',
+                fontFamily: 'Grapalat',
+                fontSize: 20,
+                laterSpacing: 1,
+                fontWeight: FontWeight.bold,
+                color: Palette.appBarTitleColor,
+              ),
             ),
           ),
           body: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
-                  "Page Home",
+                  "Page Account",
                   style: TextStyle(
                     color: Colors.green[900],
                     fontSize: 45,

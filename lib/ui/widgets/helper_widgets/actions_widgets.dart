@@ -1,8 +1,11 @@
+// ignore_for_file: no_logic_in_create_state
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mashtoz_flutter/ui/widgets/helper_widgets/text_widgets.dart';
 
 import '../../../config/palette.dart';
 
@@ -10,20 +13,70 @@ class ActionsHelper extends StatefulWidget {
   final double? sizeIcon;
   final double? sizeBox;
   final Color? color;
+  final double? fontSize;
+  final String? fontFamily;
+  final double? laterSpacing;
+  final FontWeight? fontWeight;
+  final double? topPadding;
+  final double? leftPadding;
+  final double? botomPadding;
+  final String? text;
 
   const ActionsHelper({
     Key? key,
+    this.botomPadding,
     this.sizeIcon,
     this.sizeBox,
     this.color,
+    this.text = '',
+    this.topPadding = 0,
+    this.leftPadding = 0,
+    this.fontSize = 0,
+    this.fontFamily = '',
+    this.laterSpacing = 0,
+    this.fontWeight = FontWeight.normal,
   }) : super(key: key);
 
   @override
-  State<ActionsHelper> createState() => _ActionsHelperState();
+  State<ActionsHelper> createState() => _ActionsHelperState(
+        fontFamily: fontFamily,
+        fontSize: fontSize,
+        text: text,
+        fontWeight: fontWeight,
+        topPadding: topPadding,
+        laterSpacing: laterSpacing,
+        leftPadding: leftPadding,
+        botomPadding: botomPadding,
+        color: color,
+      );
 }
 
 class _ActionsHelperState extends State<ActionsHelper>
     with SingleTickerProviderStateMixin {
+  final double? sizeIcon;
+  final double? sizeBox;
+  final Color? color;
+  final double? fontSize;
+  final String? fontFamily;
+  final double? laterSpacing;
+  final FontWeight? fontWeight;
+  final double? topPadding;
+  final double? leftPadding;
+  final String? text;
+  final double? botomPadding;
+  _ActionsHelperState({
+    this.sizeIcon,
+    this.sizeBox,
+    this.color,
+    this.text,
+    this.topPadding = 0,
+    this.leftPadding = 0,
+    this.botomPadding = 0,
+    this.fontSize = 0,
+    this.fontFamily = '',
+    this.laterSpacing = 0,
+    this.fontWeight = FontWeight.normal,
+  });
   late AnimationController _controller;
   bool iconAcitve = true;
   @override
@@ -65,9 +118,21 @@ class _ActionsHelperState extends State<ActionsHelper>
   Widget build(BuildContext context) {
     final animation = Tween(begin: 0, end: 0.5 * pi).animate(_controller);
     return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       mainAxisSize: MainAxisSize.min,
       children: [
+        Padding(
+          padding: EdgeInsets.only(top: topPadding!, left: leftPadding!),
+          child: Text(
+            text ?? '',
+            style: TextStyle(
+                letterSpacing: laterSpacing,
+                fontFamily: fontFamily,
+                fontSize: fontSize,
+                fontWeight: fontWeight,
+                color: color),
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.only(right: 20),
           child: SizedBox(
@@ -81,7 +146,7 @@ class _ActionsHelperState extends State<ActionsHelper>
 
                   color: iconAcitve
                       ? Palette.appBarIconMenuColor
-                      : Palette.appBarIconCloseColor,
+                      : const Color.fromRGBO(122, 108, 115, 1),
                   fit: BoxFit.cover,
                   height: 120,
                   //width: 60,

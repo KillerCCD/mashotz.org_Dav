@@ -49,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Palette.textLineOrBackGroundColor,
         body: pages[_currentIndex],
         resizeToAvoidBottomInset: false,
         bottomNavigationBar: buildMyNavBar(context));
@@ -132,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 setState(() {
                                   _currentIndex = 0;
                                   icons = BottomIcons.home;
-                                  isHome = !isHome;
+                                  isHome = true;
                                   isLibrary = false;
                                   isSearch = false;
                                   isItalian = false;
@@ -157,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 setState(() {
                                   icons = BottomIcons.library;
                                   _currentIndex = 1;
-                                  isLibrary = !isLibrary;
+                                  isLibrary = true;
                                   isHome = false;
                                   isSearch = false;
                                   isItalian = false;
@@ -182,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   setState(() {
                                     _currentIndex = 2;
                                     icons = BottomIcons.search;
-                                    isSearch = !isSearch;
+                                    isSearch = true;
                                     isHome = false;
                                     isLibrary = false;
                                     isItalian = false;
@@ -206,7 +207,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 setState(() {
                                   icons = BottomIcons.italian;
                                   _currentIndex = 3;
-                                  isItalian = !isItalian;
+                                  isItalian = true;
                                   isHome = false;
                                   isLibrary = false;
                                   isSearch = false;
@@ -231,7 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 setState(() {
                                   _currentIndex = 4;
                                   icons = BottomIcons.account;
-                                  isAccount = !isAccount;
+                                  isAccount = true;
                                   isHome = false;
                                   isLibrary = false;
                                   isSearch = false;
