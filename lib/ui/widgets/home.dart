@@ -1,8 +1,9 @@
 // ignore_for_file: avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
-import 'package:mashtoz_flutter/domens/entity/book.dart';
 import 'package:mashtoz_flutter/domens/repository/book_service.dart';
+
+import '../../domens/models/book.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);

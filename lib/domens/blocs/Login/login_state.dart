@@ -1,28 +1,36 @@
 import 'package:equatable/equatable.dart';
-import 'package:mashtoz_flutter/domens/entity/user.dart';
+import 'package:formz/formz.dart';
 
-abstract class LoginState extends Equatable {
-  const LoginState();
+import 'package:mashtoz_flutter/domens/models/email.dart';
+import 'package:mashtoz_flutter/domens/models/passowrd.dart';
 
-  @override
-  List<Object?> get props => [];
-}
-
-class LoginInitial extends LoginState {
-  const LoginInitial();
-}
-
-class LoginSucces extends LoginState {
-  final List<User> users;
-  const LoginSucces({
-    required this.users,
+class LoginState extends Equatable {
+  final Email email;
+  final Password password;
+  final FormzStatus status;
+  final String? errorMessage;
+  const LoginState({
+    this.email = const Email.pure(),
+    this.password = const Password.pure(),
+    this.status = FormzStatus.pure,
+    this.errorMessage,
   });
-  @override
-  String toString() {
-    return 'From_LoginState :$users';
-  }
-}
 
-class LoginFeilure extends LoginState {
-  const LoginFeilure();
+  LoginState copyWith({
+    Email? email,
+    Password? password,
+    FormzStatus? status,
+    String? errorMessage,
+  }) {
+    print("from Login State : $status");
+    return LoginState(
+      email: email ?? this.email,
+      password: password ?? this.password,
+      status: status ?? this.status,
+      errorMessage: errorMessage ?? this.errorMessage,
+    );
+  }
+
+  @override
+  List<Object?> get props => [email, password, status, errorMessage];
 }

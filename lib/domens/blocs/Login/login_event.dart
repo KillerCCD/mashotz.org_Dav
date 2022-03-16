@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import 'package:mashtoz_flutter/domens/entity/user.dart';
+import '../../models/user.dart';
 
 abstract class LoginEvent extends Equatable {
   const LoginEvent();

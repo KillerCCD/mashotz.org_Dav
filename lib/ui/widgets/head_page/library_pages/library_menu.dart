@@ -16,28 +16,34 @@ class LibraryPage extends StatefulWidget {
 }
 
 class _LibraryPageState extends State<LibraryPage> {
+  bool isColorAvtive = false;
   final libraryPages = const [
     TextHelper(
-        text: 'Աղոթք',
-        fontSize: 18,
-        fontFamily: 'Grapalat',
-        fontWeight: FontWeight.w400,
-        laterSpacing: 1,
-        color: Palette.textLineOrBackGroundColor),
+      text: 'Աղոթք',
+      fontSize: 18,
+      fontFamily: 'Grapalat',
+      fontWeight: FontWeight.w400,
+      laterSpacing: 1,
+      //color: Palette.textLineOrBackGroundColor
+      index: 0,
+    ),
     TextHelper(
         text: 'Ջատագովություն',
         fontSize: 18,
         fontFamily: 'Grapalat',
         fontWeight: FontWeight.w400,
         laterSpacing: 1,
-        color: Palette.textLineOrBackGroundColor),
+        color: Palette.textLineOrBackGroundColor,
+        index: 0,
+        ),
     TextHelper(
         text: 'Աստվածաշնչյան Նյութեր',
         fontSize: 18,
         fontFamily: 'Grapalat',
         fontWeight: FontWeight.w400,
         laterSpacing: 1,
-        color: Palette.textLineOrBackGroundColor),
+        color: Palette.textLineOrBackGroundColor,
+        index: 0,),
     TextHelper(
       text: 'Քրիստոնեական Ուսուցում',
       fontSize: 18,
@@ -45,6 +51,7 @@ class _LibraryPageState extends State<LibraryPage> {
       fontWeight: FontWeight.w400,
       laterSpacing: 1,
       color: Palette.textLineOrBackGroundColor,
+      index: 0,
     ),
     TextHelper(
         text: 'Մարեմական Նյութեր',
@@ -59,36 +66,41 @@ class _LibraryPageState extends State<LibraryPage> {
         fontFamily: 'Grapalat',
         fontWeight: FontWeight.w400,
         laterSpacing: 1,
-        color: Palette.textLineOrBackGroundColor),
+        color: Palette.textLineOrBackGroundColor,
+        index: 0,),
     TextHelper(
         text: 'Վարք Սրբոց',
         fontSize: 18,
         fontFamily: 'Grapalat',
         fontWeight: FontWeight.w400,
         laterSpacing: 1,
-        color: Palette.textLineOrBackGroundColor),
+        color: Palette.textLineOrBackGroundColor,
+        index: 0,),
     TextHelper(
         text: 'Հոգեշահ Հեղինակներ',
         fontSize: 18,
         fontFamily: 'Grapalat',
         fontWeight: FontWeight.w400,
         laterSpacing: 1,
-        color: Palette.textLineOrBackGroundColor),
+        color: Palette.textLineOrBackGroundColor,
+        index: 0,),
     TextHelper(
         text: 'Հոգեշահ Հեղինակներ',
         fontSize: 18,
         fontFamily: 'Grapalat',
         fontWeight: FontWeight.w400,
         laterSpacing: 1,
-        color: Palette.textLineOrBackGroundColor),
+        color: Palette.textLineOrBackGroundColor,
+        index: 0,),
     TextHelper(
-        text: 'Ընդհանրական Եկեղեցու Վավերագրեր',
+        text: 'Ընդհանրական Եկեղեցու\nՎավերագրեր',
         fontSize: 18,
         textAlign: TextAlign.right,
         fontFamily: 'Grapalat',
         fontWeight: FontWeight.w400,
         laterSpacing: 1,
-        color: Palette.textLineOrBackGroundColor),
+        color: Palette.textLineOrBackGroundColor,
+        index: 0,),
     TextHelper(
         text: 'Հոգեբանություն',
         fontSize: 18,
@@ -110,62 +122,59 @@ class _LibraryPageState extends State<LibraryPage> {
       color: const Color.fromRGBO(25, 4, 18, 1),
       padding: const EdgeInsets.only(top: 38),
       child: Scaffold(
-          backgroundColor: Palette.libraryBacgroundColor,
-          extendBodyBehindAppBar: true,
-          appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(43),
-            child: AppBar(
-              elevation: 0,
-              automaticallyImplyLeading: false,
-              backgroundColor: Palette.barColor,
-              flexibleSpace: const Padding(
-                padding: EdgeInsets.only(),
-                child: ActionsHelper(
-                  leftPadding: 20,
-                  botomPadding: 1.5,
-                  text: 'Գարադարան',
-                  fontFamily: 'Grapalat',
-                  fontSize: 23,
-                  laterSpacing: 1,
-                  fontWeight: FontWeight.bold,
-                  color: Palette.textLineOrBackGroundColor,
-                ),
+        backgroundColor: Palette.libraryBacgroundColor,
+        extendBodyBehindAppBar: true,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(43),
+          child: AppBar(
+            elevation: 0,
+            automaticallyImplyLeading: false,
+            backgroundColor: Palette.barColor,
+            flexibleSpace: const Padding(
+              padding: EdgeInsets.only(),
+              child: ActionsHelper(
+                leftPadding: 20,
+                botomPadding: 1.5,
+                text: 'Գարադարան',
+                fontFamily: 'Grapalat',
+                fontSize: 23,
+                laterSpacing: 1,
+                fontWeight: FontWeight.bold,
+                color: Palette.textLineOrBackGroundColor,
               ),
             ),
           ),
-          body: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Expanded(
-                  child: Scrollbar(
-                      thickness: 3,
-                      radius: const Radius.circular(12),
-                      isAlwaysShown: true,
-                      showTrackOnHover: true,
-                      child: ListView.builder(
-                        itemCount: libraryPages.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.only(right: 15.0),
-                            child: ListTile(
-                              trailing: libraryPages[index],
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => const AxotqScreen(),
-                                  ),
-                                );
-                              },
-                            ),
-                          );
-                        },
-                      )),
-                ),
-              ],
-            ),
-          )),
+        ),
+        body: Scrollbar(
+            thickness: 3,
+            radius: const Radius.circular(12),
+            isAlwaysShown: true,
+            showTrackOnHover: true,
+            child: ListView.builder(
+              itemCount: libraryPages.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(right: 0),
+                  child: ListTile(
+                   
+                    trailing: libraryPages[index],
+                    onTap: () {
+                      setState(() {
+                        isColorAvtive = !isColorAvtive;
+                      });
+
+                      //   Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (_) => const AxotqScreen(),
+                      //     ),
+                      //   );
+                    },
+                  ),
+                );
+              },
+            )),
+      ),
     );
   }
 }

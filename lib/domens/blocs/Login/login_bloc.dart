@@ -1,28 +1,55 @@
 import 'package:bloc/bloc.dart';
-import 'package:mashtoz_flutter/domens/blocs/Login/login_event.dart';
+import 'package:formz/formz.dart';
+
 import 'package:mashtoz_flutter/domens/blocs/Login/login_state.dart';
-import 'package:mashtoz_flutter/domens/entity/user.dart';
-import 'package:mashtoz_flutter/domens/repository/login_service.dart';
+import 'package:mashtoz_flutter/domens/models/email.dart';
+import 'package:mashtoz_flutter/domens/models/passowrd.dart';
 
-class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final LoginService loginService;
+import 'package:mashtoz_flutter/domens/repository/user_data_provider.dart';
 
-  LoginBloc({required this.loginService}) : super(const LoginInitial()) {
-    on<UserNameChanged>(onChanged);
-    on<ButtonPressed>(onPressed);
+import '../../repository/authentication_ropsitory.dart';
+
+class LoginBloc extends Cubit<LoginState> {
+  
+  final AuthenticationRepository _authenticationRepository;
+  LoginBloc(this._authenticationRepository) : super(const LoginState());
+
+  void emailChanged(String value) {
+    final email = Email.dirty(value);
+    print(email);
+    emit(state.copyWith(
+      email: email,
+      status: Formz.validate([email, state.password]),
+    ));
   }
 
-  void onChanged(UserNameChanged event, Emitter<LoginState> emit) {
-    List<User> changeUser = (state as LoginSucces)
-        .users
-        .map((user) => user.id == event.user.id ? event.user : user)
-        .toList();
-    emit(LoginSucces(users: changeUser));
+  void passwordChanged(String value) {
+    final password = Password.dirty(value);
+    print(password);
+    emit(state.copyWith(
+      password: password,
+      status: Formz.validate([state.email, password]),
+    ));
   }
 
-  void onPressed(ButtonPressed event, Emitter<LoginState> emit) {
-    if (state  is LoginSucces) {
-      loginService.login(event.user.toMap());
+  Future<void> loginWithCredentials() async {
+    if (!state.status.isValidated) return;
+    emit(state.copyWith(status: FormzStatus.submissionInProgress));
+    try {
+      await _authenticationRepository.logInWithEmailAndPassword(
+        email: state.email.value,
+        password: state.password.value,
+      );
+      emit(state.copyWith(status: FormzStatus.submissionSuccess));
+    } on Exception catch (e) {
+      emit(
+        state.copyWith(
+          errorMessage: e.toString(),
+          status: FormzStatus.submissionFailure,
+        ),
+      );
+    } catch (e) {
+      emit(state.copyWith(status: FormzStatus.submissionFailure));
     }
   }
 }

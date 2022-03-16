@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import 'package:mashtoz_flutter/domens/entity/book.dart';
+import 'package:mashtoz_flutter/domens/models/book.dart';
 
 class BookRepository {
   final url = Uri.parse('https://jsonplaceholder.typicode.com/comments');

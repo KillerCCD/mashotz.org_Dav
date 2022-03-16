@@ -9,8 +9,10 @@ class TextHelper extends StatelessWidget {
   final String? text;
   final Color? color;
   final TextAlign? textAlign;
+  final int? index;
   const TextHelper(
       {Key? key,
+      this.index,
       this.text = '',
       this.bottomPadding = 0,
       this.fontSize = 0,
