@@ -9,10 +9,9 @@ import 'package:mashtoz_flutter/domens/repository/user_data_provider.dart';
 
 import '../../repository/authentication_ropsitory.dart';
 
-class LoginBloc extends Cubit<LoginState> {
-  
+class LoginCubit extends Cubit<LoginState> {
   final AuthenticationRepository _authenticationRepository;
-  LoginBloc(this._authenticationRepository) : super(const LoginState());
+  LoginCubit(this._authenticationRepository) : super(const LoginState());
 
   void emailChanged(String value) {
     final email = Email.dirty(value);

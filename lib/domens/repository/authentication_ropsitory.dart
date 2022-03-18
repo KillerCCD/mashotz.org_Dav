@@ -1,38 +1,48 @@
-// class SignUpWithEmailAndPasswordFailure implements Exception {
-//   const SignUpWithEmailAndPasswordFailure([
-//     this.message = 'An unknown exception occurred.',
-//   ]);
+import 'dart:convert';
+import 'dart:developer';
 
-//   factory SignUpWithEmailAndPasswordFailure.fromCode(String code) {
-//     switch (code) {
-//       case 'invalid-email':
-//         return const SignUpWithEmailAndPasswordFailure(
-//           'Email is not valid or badly formatted.',
-//         );
-//       case 'user-disabled':
-//         return const SignUpWithEmailAndPasswordFailure(
-//           'This user has been disabled. Please contact support for help.',
-//         );
-//       case 'email-already-in-use':
-//         return const SignUpWithEmailAndPasswordFailure(
-//           'An account already exists for that email.',
-//         );
-//       case 'operation-not-allowed':
-//         return const SignUpWithEmailAndPasswordFailure(
-//           'Operation is not allowed.  Please contact support.',
-//         );
-//       case 'weak-password':
-//         return const SignUpWithEmailAndPasswordFailure(
-//           'Please enter a stronger password.',
-//         );
-//       default:
-//         return const SignUpWithEmailAndPasswordFailure();
-//     }
-//   }
+import 'package:mashtoz_flutter/domens/data_providers/session_data_provider.dart';
+import 'package:mashtoz_flutter/domens/models/categoy_list.dart';
 
-//   /// The associated error message.
-//   final String message;
-// }
+import '../../globals.dart';
+import 'package:http/http.dart' as http;
+
+class SignUpWithEmailAndPasswordFailure implements Exception {
+  final String? message;
+  const SignUpWithEmailAndPasswordFailure([
+    this.message,
+  ]);
+
+  static SignUpWithEmailAndPasswordFailure singUpExeptions(String e) {
+    switch (e) {
+      case 'invalid-email':
+        return const SignUpWithEmailAndPasswordFailure(
+          'Email is not valid or badly formatted.',
+        );
+      case 'user-disabled':
+        return const SignUpWithEmailAndPasswordFailure(
+          'This user has been disabled. Please contact support for help.',
+        );
+      case 'email-already-in-use':
+        return const SignUpWithEmailAndPasswordFailure(
+          'An account already exists for that email.',
+        );
+      case 'operation-not-allowed':
+        return const SignUpWithEmailAndPasswordFailure(
+          'Operation is not allowed.  Please contact support.',
+        );
+      case 'password min 8 digits':
+        return const SignUpWithEmailAndPasswordFailure(
+          'Please enter a stronger password.',
+        );
+      default:
+        return const SignUpWithEmailAndPasswordFailure();
+    }
+  }
+
+  /// The associated error message.
+
+}
 
 // class LogInWithEmailAndPasswordFailure implements Exception {
 //   /// {@macro log_in_with_email_and_password_failure}
@@ -71,21 +81,21 @@
 //on LogInWithEmailAndPasswordFailure catch (e) {
 //throw LogInWithEmailAndPasswordFailure.fromCode(e.message);
 
-import 'dart:convert';
-
-import '../../globals.dart';
-import 'package:http/http.dart' as http;
-
 class AuthenticationRepository {
-  Future<void> signUp({required String email, required String password}) async {
+  final sessionDataProvider = SessionDataProvider();
+  Future<bool> signUp(
+      {required String email,
+      required String password,
+      required fullName}) async {
+    bool isSuscces = false;
     try {
-      await createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-    } catch (e) {
+      isSuscces = await createUserWithNAmeEmailAndPassword(
+          email: email, password: password, fullName: fullName) as bool;
+    } on SignUpWithEmailAndPasswordFailure catch (e) {
       print(e);
-    }
+      throw SignUpWithEmailAndPasswordFailure.singUpExeptions(e.message!);
+    } catch (_) {}
+    return isSuscces;
   }
 
   Future<void> logInWithEmailAndPassword({
@@ -93,10 +103,7 @@ class AuthenticationRepository {
     required String password,
   }) async {
     try {
-      signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      signInWithEmailAndPassword(email: email, password: password);
     } catch (e) {
       print(e);
     }
@@ -112,16 +119,21 @@ class AuthenticationRepository {
 
   Future<void> signInWithEmailAndPassword(
       {String? email, String? password}) async {
-    var token =
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzBjYzMxNzNhZjI0MTY4NmNiODhiMTg0NDZjNTUxMjE0YWUyOGMwODc3ZmEzMTRkZmJiYjdiMTgxOWE3Mjc2N2EzZjU4NWZjNWVkZmMzOWYiLCJpYXQiOjE2NDI3ODAyNTMsIm5iZiI6MTY0Mjc4MDI1MywiZXhwIjoxNjc0MzE2MjUzLCJzdWIiOiIxNiIsInNjb3BlcyI6W119.VRkfqtqW9Fc41LBb81LYovzVyCe2qktuy1LqanRQffUcyfIil_EUYzJu1Ij63FQ4gjRo1PIN9uHfQHrK8gtX0a4zCGuAYPXWAOY7hyZDwnUtTLvYJXVDPL2bdsef48T9lQF7XTyZSk20_m0JhdC_C8zYwn5w2EIqjnt6f-9qvrkbpAuHbUkNpwUVWoIxAhoDT5QnN1cD_30tpEgnTTS36_k_uTrHrm0QjgTBFe4wjlv4gEacDrtmA4qnVb3dB-VppAuowhldurlYKCTCVmCWOpcrQ-Ufl2pTpFZE4Z6bcP8uda9b5CTvsfrzhy5u9YhZGoNMbSh18aNSg1gUlsjWjTMVTsquVGKCWUvHCya4Rcz__TgaTCnZ8GLtUtv0TV4KqVl-PI-L7jZmTYc40Ut7Z2JoPNQ1XmM62XzDgo2pmjgo6Cie2E24MckqY';
-    Map userData = {'email': email, 'password': password};
+    Map userData = {
+      'email': email,
+      'password': password,
+    };
     try {
-      var response = await http.post(Uri.parse(Api.loginUrl),
-          headers: <String, String>{
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer $token',
-          },
-          body: jsonEncode(userData));
+      var response = await http.post(
+        Uri.parse(Api.loginUrl),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(userData),
+      );
+      var body = jsonDecode(response.body);
+      var data = body['data']['content'];
+      print(data);
       if (response.statusCode == 200) {
         print('success');
       } else {
@@ -132,8 +144,46 @@ class AuthenticationRepository {
     }
   }
 
-  Future<void> createUserWithEmailAndPassword(
-      {String? email, String? password}) async {}
+  Future<bool?> createUserWithNAmeEmailAndPassword(
+      {String? email, String? password, String? fullName}) async {
+    Map userData = {
+      'email': 'asa.asa@gmail.com',
+      'password': 'asdfghjk',
+      // 'full_name': fullName,
+    };
+    // var token = await sessionDataProvider.gettRegtoken();
+    var token =
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbWFzaHRvei5vcmdcL2FwaVwvdjFcL2xvZ2luIiwiaWF0IjoxNjQ3NjI2NDYyLCJleHAiOjE2NDc2MzAwNjIsIm5iZiI6MTY0NzYyNjQ2MiwianRpIjoiSWVQRUZ6cVFnRUxUaFhwZCIsInN1YiI6MjUsInBydiI6ImEzZDg2OGQ4OTEyOTZhZTMwNzM2NjJiMmYwMjRkY2Y2YzY3YjUzZmMiLCJyb2xlIjoiY3VzdG9tZXIifQ.4K5NQ7rIXFvwLVGaySPopyniR_oiycBwzxeSMP_6eg8";
+    print('$token object');
+    bool isSucces = false;
+    try {
+      var response = await http.get(
+        Uri.parse('https://mashtoz.org/api/v1/me'),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        //body: jsonEncode(userData),
+      );
+      var body = jsonDecode(response.body);
+      var success = body['success'];
+      if (success == true) {
+        var data = body['data'];
+        final library = libraryFromJson(data);
+        inspect(library);
+        // sessionDataProvider.setRegtoken(token);
+        print(token);
+        isSucces = true;
+      } else {
+        print("failed");
+        isSucces = false;
+        throw SignUpWithEmailAndPasswordFailure.singUpExeptions('bolola');
+      }
+    } catch (e) {
+      print(e);
+    }
+    return isSucces;
+  }
 }
 
 class LogOutFailure implements Exception {}

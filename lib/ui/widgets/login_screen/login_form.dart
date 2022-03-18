@@ -22,9 +22,10 @@ class _LoginFormState extends State<LoginForm> {
     var screenSize = MediaQuery.of(context).size;
     print("width : ${screenSize.width}");
     print("width : ${screenSize.height}");
-    return BlocListener<LoginBloc, LoginState>(
+    return BlocListener<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state.status.isSubmissionFailure) {
+          print('dadas');
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
@@ -75,7 +76,7 @@ class _LoginIput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(
+    return BlocBuilder<LoginCubit, LoginState>(
       buildWhen: (previous, current) => previous.email != current.email,
       builder: (context, state) {
         print("Login input ${state.email.invalid}");
@@ -95,9 +96,9 @@ class _LoginIput extends StatelessWidget {
               color: Palette.labelText,
             ),
             focusColor: Palette.labelText,
-            errorText: state.email.invalid ? 'invalid password' : null,
+            errorText: state.email.invalid ? 'invalid email' : null,
           ),
-          onChanged: (email) => context.read<LoginBloc>().emailChanged(email),
+          onChanged: (email) => context.read<LoginCubit>().emailChanged(email),
         );
       },
     );
@@ -122,7 +123,7 @@ class _PasswordInputState extends State<PasswordInput> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(
+    return BlocBuilder<LoginCubit, LoginState>(
         buildWhen: (previous, current) => previous.password != current.password,
         builder: (context, state) {
           print("password input ${state.email.invalid}");
@@ -158,7 +159,7 @@ class _PasswordInputState extends State<PasswordInput> {
               errorText: state.password.invalid ? 'invalid password' : null,
             ),
             onChanged: (password) =>
-                context.read<LoginBloc>().passwordChanged(password),
+                context.read<LoginCubit>().passwordChanged(password),
           );
         });
   }
@@ -181,7 +182,7 @@ class _LoginButtonState extends State<_LoginButton> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(
+    return BlocBuilder<LoginCubit, LoginState>(
         buildWhen: (previous, current) => previous.status != current.status,
         builder: (context, state) {
           return state.status.isSubmissionInProgress
@@ -228,7 +229,7 @@ class _LoginButtonState extends State<_LoginButton> {
                                   if (state.status.isValidated) {
                                     print(state.status.isValidated);
                                     context
-                                        .read<LoginBloc>()
+                                        .read<LoginCubit>()
                                         .loginWithCredentials();
                                   }
                                 },

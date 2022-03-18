@@ -37,14 +37,16 @@ class User extends Equatable {
 
   Map<String, dynamic> toMap() {
     return {
-      'userName': fullName,
+      'full_name': fullName,
       'password': password,
+      'email': email,
     };
   }
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      fullName: json['userName'],
+      fullName: json['full_name'],
+      email: json['email'],
       password: json['password'],
       id: json['id'],
     );
@@ -52,5 +54,5 @@ class User extends Equatable {
 
   String toJson() => json.encode(toMap());
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [fullName, password];
 }
